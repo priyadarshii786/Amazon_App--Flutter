@@ -7,6 +7,7 @@ class AuthScreen extends StatefulWidget {
   AuthScreen({super.key});
 
   // bool inLogin = false;   //  <-----  dhyan do yaha
+  String currentCountryCode = '+91';
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -18,8 +19,10 @@ class _AuthScreenState extends State<AuthScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final TextTheme = Theme.of(context).textTheme;
+    // String currentCountryCode = '+91';
 
     bool inLogin = true; //  <-----  dhyan do yaha
+    String currentCountryCode = '+91';
 
     return Scaffold(
       backgroundColor: white,
@@ -72,18 +75,25 @@ class _AuthScreenState extends State<AuthScreen> {
                       padding: EdgeInsets.symmetric(horizontal: width * 0.03),
                       child: Row(
                         children: [
-                          Container(
-                            height: height * 0.03,
-                            width: height * 0.03,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color: grey),
-                                color: white),
-                            alignment: Alignment.center,
-                            child: Icon(
-                              Icons.circle,
-                              size: height * 0.015,
-                              color: inLogin ? transparent : secondaryColor,
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                inLogin = false;
+                              });
+                            },
+                            child: Container(
+                              height: height * 0.03,
+                              width: height * 0.03,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: grey),
+                                  color: white),
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.circle,
+                                size: height * 0.015,
+                                color: inLogin ? transparent : secondaryColor,
+                              ),
                             ),
                           ),
                           CommonFunctions.blankspace(
@@ -121,18 +131,25 @@ class _AuthScreenState extends State<AuthScreen> {
                   children: [
                     Row(
                       children: [
-                        Container(
-                          height: height * 0.03,
-                          width: height * 0.03,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: grey),
-                              color: white),
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.circle,
-                            size: height * 0.015,
-                            color: inLogin ? secondaryColor : transparent,
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              inLogin = true;
+                            });
+                          },
+                          child: Container(
+                            height: height * 0.03,
+                            width: height * 0.03,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: grey),
+                                color: white),
+                            alignment: Alignment.center,
+                            child: Icon(
+                              Icons.circle,
+                              size: height * 0.015,
+                              color: inLogin ? secondaryColor : transparent,
+                            ),
                           ),
                         ),
                         CommonFunctions.blankspace(
@@ -156,6 +173,34 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                       ],
                     ),
+                    CommonFunctions.blankspace(
+                      height * 0.01,
+                      0,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 0.06,
+                          width: width * 0.2,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: grey,
+                            ),
+                            color: greyShade2,
+                            borderRadius: BorderRadius.circular(
+                              5,
+                            ),
+                          ),
+                          child: Text(
+                            currentCountryCode,
+                            style: TextTheme.displaySmall!.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               )
